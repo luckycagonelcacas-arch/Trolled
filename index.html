@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanks for Visiting</title>
+<style>
+/* Concept: single centered stage, 90s bubble-UI look; gummy bear does a turkey dance standing on the button. */
+:root{
+  --bg1:#2a0f3d; --bg2:#7a2a5e; --cream:#fff1c9; --orange:#ff8a1f; --orange-d:#d9560b;
+  --green:#3ddc4a; --green-d:#16902a; --green-l:#b9ffb0; --ink:#2b1238;
+  --display:"Chango","Arial Rounded MT Bold","Trebuchet MS",sans-serif;
+  --body:"Baloo 2","Trebuchet MS",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:var(--body); color:var(--ink);
+  background:#fff;
+  padding-block:24px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex; align-items:center; justify-content:center; text-align:center;
+}
+main{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:520px;width:100%}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2rem,8vw,3.2rem);line-height:1.05;margin:0;color:var(--orange);
+  text-shadow:0 3px 0 var(--orange-d);text-wrap:balance}
+p{font-size:1.2rem;margin:8px 0 0;max-width:36ch;text-wrap:balance}
+
+.stage{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:8px}
+.bear{width:min(260px,62vw);height:auto;display:block;margin-bottom:-14px;position:relative;z-index:2;overflow:visible}
+
+/* Bubble button */
+.bubble{
+  position:relative;display:inline-block;text-decoration:none;
+  font-family:var(--display);font-size:1.35rem;color:#fff;letter-spacing:.02em;
+  padding:18px 40px;border-radius:999px;
+  background:radial-gradient(ellipse at 50% 0%,var(--green-l) 0%,var(--green) 35%,var(--green-d) 100%);
+  border:4px solid #0d5a1c;
+  box-shadow:inset 0 -8px 14px rgba(0,60,10,.45),inset 0 6px 10px rgba(255,255,255,.55),0 8px 0 #0d5a1c,0 14px 22px rgba(0,0,0,.45);
+  text-shadow:0 2px 0 #0d5a1c,0 0 8px rgba(0,70,10,.6);
+  transition:transform .12s,box-shadow .12s;
+}
+.bubble::before{ /* glossy highlight */
+  content:"";position:absolute;left:12%;right:12%;top:5px;height:42%;border-radius:999px;
+  background:linear-gradient(rgba(255,255,255,.85),rgba(255,255,255,.05));pointer-events:none}
+.bubble:hover{transform:translateY(-2px) scale(1.04)}
+.bubble:active{transform:translateY(6px);box-shadow:inset 0 -8px 14px rgba(0,60,10,.45),inset 0 6px 10px rgba(255,255,255,.55),0 2px 0 #0d5a1c,0 6px 10px rgba(0,0,0,.45)}
+.bubble:focus-visible{outline:4px solid var(--cream);outline-offset:6px}
+
+/* Turkey dance */
+.body-bob{animation:bob .6s ease-in-out infinite;transform-origin:100px 210px}
+.head{animation:peck .6s ease-in-out infinite;transform-origin:100px 105px}
+.armL{transform-origin:62px 140px;animation:flapL .6s ease-in-out infinite}
+.armR{transform-origin:138px 140px;animation:flapR .6s ease-in-out infinite}
+.legL{transform-origin:82px 190px;animation:stepL 1.2s ease-in-out infinite}
+.legR{transform-origin:118px 190px;animation:stepR 1.2s ease-in-out infinite}
+.fan{transform-origin:100px 150px;animation:fan 1.2s ease-in-out infinite}
+.wattle{transform-origin:100px 122px;animation:wiggle .3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes peck{0%,100%{transform:translateY(0)}35%{transform:translateY(8px) rotate(6deg)}60%{transform:translateY(-3px)}}
+@keyframes flapL{0%,100%{transform:rotate(25deg)}50%{transform:rotate(-70deg)}}
+@keyframes flapR{0%,100%{transform:rotate(-25deg)}50%{transform:rotate(70deg)}}
+@keyframes stepL{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(8deg)}}
+@keyframes stepR{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(14deg)}}
+@keyframes fan{0%,100%{transform:scale(1)}50%{transform:scale(1.07) rotate(2deg)}}
+@keyframes wiggle{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+/* Cookies */
+.cookies{margin-top:22px;padding:14px 16px;max-width:360px;border-radius:18px;background:var(--cream);color:var(--ink);border:3px solid var(--orange-d);box-shadow:0 5px 0 var(--orange-d);display:flex;flex-direction:column;gap:10px;align-items:center;font-size:1rem;line-height:1.25}
+.cookies[hidden]{display:none}
+.cookies button{font-family:var(--display);font-size:1rem;color:#fff;background:var(--orange);border:3px solid var(--orange-d);border-radius:999px;padding:8px 22px;cursor:pointer;box-shadow:0 4px 0 var(--orange-d)}
+.cookies button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--orange-d)}
+.cookies button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.bubble[aria-disabled="true"]{filter:grayscale(.9) brightness(.8);opacity:.6;pointer-events:none;cursor:not-allowed}
+/* Arial 11 everywhere, black heading */
+body,h1,.bubble{font-family:Arial,Helvetica,sans-serif;font-size:11pt}
+h1{color:#000;font-weight:400;text-shadow:none}
+@media (prefers-reduced-motion:reduce){.body-bob,.head,.armL,.armR,.legL,.legR,.fan,.wattle{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Thanks for visiting this place!</h1>
+
+  <div class="stage">
+
+    <a class="bubble" id="discord-btn" href="https://discord.com/app" target="_blank" rel="noopener" style="margin-top:22px">Go back</a>
+  </div>
+</main>
+<!-- Cambia el href del botón (id "discord-btn") por tu enlace de Discord. -->
+</body>
+</html>
